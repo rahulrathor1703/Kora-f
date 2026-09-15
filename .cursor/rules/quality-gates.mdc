@@ -1,0 +1,20 @@
+---
+description: Frontend quality gates — lint, types, audit, dependencies
+alwaysApply: true
+---
+
+# Frontend Quality Gates
+
+Before any build or merge:
+
+1. `npm run lint` — 0 errors, 0 warnings
+2. `npm run typecheck` — no TypeScript errors
+3. `npm run audit:check` — 0 vulnerabilities
+4. `npm run deps:check` — dependencies match semver `wanted` versions
+5. `npm run build` runs all checks automatically via `validate`
+
+Never weaken ESLint rules to bypass warnings. Fix the code instead.
+
+## After every change
+
+Before marking work complete, run `npm run validate` in `markos-frontend` and fix all errors and warnings in **source files under `src/`**. Do not edit generated files under `.next/` — they are produced by Next.js and are excluded from lint via `eslint.config.mjs`.
