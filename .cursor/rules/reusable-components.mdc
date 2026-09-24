@@ -1,0 +1,23 @@
+---
+description: Reusable component patterns for Markos frontend
+globs: src/components/**/*.tsx
+alwaysApply: false
+---
+
+# Reusable Components
+
+- Shared primitives live in `src/components/ui/`
+- Feature components compose from `ui/` — no duplicate button/form patterns
+- Each UI component: typed props, `'use client'` only when needed, exported via barrel `index.ts`
+- Page files stay thin; content lives in `*Content` components (e.g. `LandingContent`)
+- Do not inline MUI button/form markup in pages when a `ui/` primitive exists
+
+```tsx
+// ✅ GOOD — thin page
+export default function HomePage() {
+  return <LandingContent initialHealth={initialHealth} />;
+}
+
+// ❌ BAD — duplicated button styling in a page file
+<Button sx={{ backgroundColor: '...' }}>Submit</Button>
+```
